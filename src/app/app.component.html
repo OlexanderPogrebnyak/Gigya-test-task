@@ -1,0 +1,19 @@
+<div class="site-wrapper">
+
+  <div class="site-wrapper-inner">
+
+    <div class="cover-container">
+
+
+      <app-header></app-header>
+      <div class="inner cover">
+        <!-- <app-account-options-form ></app-account-options-form> -->
+        <router-outlet (errorSignal)="showError($event)"></router-outlet>
+      </div>
+      <app-footer></app-footer>
+
+    </div>
+
+  </div>
+
+</div>
