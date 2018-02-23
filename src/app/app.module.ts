@@ -4,13 +4,12 @@ import { AppComponent } from './app.component';
 import {JsonpModule} from '@angular/http';
 import { AccountOptionsService } from './services/account-options.service';
 import { AccountOptionsFormComponent } from './components/account-options-form/account-options-form.component';
-import { ReactiveFormsModule } from '@angular/forms'; 
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NotificationsModule, NotificationsService} from 'angular4-notify';
-import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,14 +20,9 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([
-      { path: '', component: AccountOptionsFormComponent, data: {readonly:false}},
-      { path: 'readonly', component: AccountOptionsFormComponent, data: {readonly:true}},
-      { path: '**', redirectTo: '/'}
-    
-    ]),
+    AppRoutingModule,
     JsonpModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NotificationsModule,
 
