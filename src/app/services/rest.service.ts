@@ -4,13 +4,15 @@ import 'rxjs/add/operator/map';
 import { Observable } from "rxjs/Observable";
 import { AccountOptions } from "../model/account-options.model";
 
-const PROTOCOL = "https";
+//1. repo (in constructor) ===> rest
+//2. rest ====> backend
+//3. component.get =====> repo
 @Injectable()
-export class AccountOptionsService {
+export class RestService {
 
     private protocol: string = 'https';
     private apiRoot: string = 'accounts.gigya.com';
-    private getMethod:string = 'accounts.getPolicies'; 
+    private getMethod:string = 'accounts.getPolicies';
     private setMethod:string = 'accounts.setPolicies';
     private UserKey: string = 'AJA3Cw9XcJZf';
     private UserSecret: string = '1J%2BYxAY47khnuXf4GKSggLpPFBbQv8Hq';
@@ -21,11 +23,11 @@ export class AccountOptionsService {
     apiURLGet: string;
     apiURLSet:string;
 
-    constructor(private jsonp: Jsonp) {     
+    constructor(private jsonp: Jsonp) {
 
-        this.apiURLGet = `${this.protocol}://${this.apiRoot}/${this.getMethod}?userkey=${this.UserKey}&secret=${this.UserSecret}&apikey=${this.APIKey}&format=${this.format}&callback=${this.callback}`; 
+        this.apiURLGet = `${this.protocol}://${this.apiRoot}/${this.getMethod}?userkey=${this.UserKey}&secret=${this.UserSecret}&apikey=${this.APIKey}&format=${this.format}&callback=${this.callback}`;
         this.apiURLSet = `${this.protocol}://${this.apiRoot}/${this.setMethod}?userkey=${this.UserKey}&secret=${this.UserSecret}&apikey=${this.APIKey}&format=${this.format}&callback=${this.callback}`;;
-    
+
     }
 
     getAccountOptions(): Observable<AccountOptions> {
@@ -40,10 +42,10 @@ export class AccountOptionsService {
     setAccountOptions(accountOptions:AccountOptions) {
 
         const serialisedAccountOptions = JSON.stringify(accountOptions);
-        
+
         return this.jsonp.get(this.apiURLSet+'&accountOptions='+serialisedAccountOptions)
         .map(response => response.json())
-       
+
     }
 
 

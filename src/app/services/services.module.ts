@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { NotificationsService } from 'angular4-notify';
-import { AccountOptionsService } from './account-options.service';
+import { RestService } from './rest.service';
 
 @NgModule({
   providers: [
-    AccountOptionsService,
+    RestService,
     NotificationsService]
 })
 export class ServicesModule { }

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {JsonpModule} from '@angular/http';
-import { AccountOptionsService } from './services/account-options.service';
 import { AccountOptionsFormComponent } from './components/account-options-form/account-options-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

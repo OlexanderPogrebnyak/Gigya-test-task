@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { AccountOptions } from '../../model/account-options.model';
-import { AccountOptionsService } from '../../services/account-options.service';
+import { RestService } from '../../services/rest.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { loginIdentifierConflictChoices } from '../../model/login-identifier-conflict-choices.constant';
@@ -22,15 +22,15 @@ export class AccountOptionsFormComponent implements OnInit {
   loginIdentifierConflictChoices = loginIdentifierConflictChoices;
   readonly:boolean;
 
-  constructor(private accountOptionsService: AccountOptionsService, 
+  constructor(private restService: RestService,
     private fb: FormBuilder,private notificationsService: NotificationsService,private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
     this.readonly = this.route.snapshot.data['readonly'];
-    
-    this.getAccountOptionsSubscription = this.accountOptionsService.getAccountOptions().subscribe(accountOptions => {
+
+    this.getAccountOptionsSubscription = this.restService.getAccountOptions().subscribe(accountOptions => {
       this.accountOptions = accountOptions;
       this.createForm();
     });
@@ -51,18 +51,18 @@ export class AccountOptionsFormComponent implements OnInit {
   onSubmit(){
     const formModel = this.accountOptionsForm.value;
 
-    this.accountOptionsService.setAccountOptions(formModel).subscribe((res)=>{
+    this.restService.setAccountOptions(formModel).subscribe((res)=>{
 
       if(res["errorCode"]!=0) {
         this.notificationsService.addError(res["errorMessage"]);
       } else {
       this.accountOptionsForm.reset(formModel);
-      } 
+      }
     },(err)=>{
-     
+
     });
   }
 
-  
+
 
 }
