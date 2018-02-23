@@ -13,7 +13,7 @@ export class RepoService {
     this.accountOptionsUpdated = new Subject();
   }
 
-public getAccountOptions(){
+getAccountOptions(){
 
     if (this.accountOptions) {
       this.accountOptionsUpdated.next(this.accountOptions);
@@ -22,7 +22,7 @@ public getAccountOptions(){
     }
   }
 
-  private fetchAccountOptions() {
+  fetchAccountOptions(){
     this.restService.getAccountOptions().subscribe(accountOptions => {
       this.accountOptions = accountOptions;
       this.accountOptionsUpdated.next(this.accountOptions);

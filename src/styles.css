@@ -172,13 +172,3 @@ body {
         width: 42rem;
     }
 }
-
-.close {
-    margin-top: 5px;
-    -webkit-appearance: searchfield-cancel-button;
-    -moz-appearance: button-arrow-down;
-}
-
-i.material-icons {
-    opacity: 0;
-}

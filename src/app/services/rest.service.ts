@@ -4,9 +4,6 @@ import 'rxjs/add/operator/map';
 import { Observable } from "rxjs/Observable";
 import { AccountOptions } from "../model/account-options.model";
 
-//1. repo (in constructor) ===> rest
-//2. rest ====> backend
-//3. component.get =====> repo
 @Injectable()
 export class RestService {
 
@@ -33,18 +30,20 @@ export class RestService {
     getAccountOptions(): Observable<AccountOptions> {
         return this.jsonp.request(this.apiURLGet)
             .map(res => {
-                console.log();
+              console.log(res);
                 return res.json().accountOptions
             });
     }
 
 
-    setAccountOptions(accountOptions:AccountOptions) {
+  setAccountOptions(accountOptions: AccountOptions): Observable<any> {
 
         const serialisedAccountOptions = JSON.stringify(accountOptions);
 
         return this.jsonp.get(this.apiURLSet+'&accountOptions='+serialisedAccountOptions)
-        .map(response => response.json())
+          .map(response => {
+            console.log(response.json);
+          return response.json();})
 
     }
 
