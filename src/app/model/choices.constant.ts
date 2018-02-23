@@ -1,4 +1,4 @@
-export const loginIdentifierConflictChoices = [{
+export const LOGIN_CHOICES = [{
     value: 'ignore',
     name: 'Ignore'
 }, {

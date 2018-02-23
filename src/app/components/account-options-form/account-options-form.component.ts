@@ -3,7 +3,7 @@ import { AccountOptions } from '../../model/account-options.model';
 import { RestService } from '../../services/rest.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { loginIdentifierConflictChoices } from '../../model/login-identifier-conflict-choices.constant';
+import { LOGIN_CHOICES } from '../../model/choices.constant';
 import { NotificationsService } from 'angular4-notify';
 import { ActivatedRoute } from '@angular/router';
 import { RepoService } from '../../services/repo.service';
@@ -18,7 +18,7 @@ import { RepoService } from '../../services/repo.service';
 export class AccountOptionsFormComponent implements OnInit {
 
   accountOptionsForm: FormGroup;
-  loginIdentifierConflictChoices = loginIdentifierConflictChoices;
+  loginIdentifierConflictChoices = LOGIN_CHOICES;
   readonly:boolean;
   accountOptions: AccountOptions;
 
@@ -60,7 +60,7 @@ export class AccountOptionsFormComponent implements OnInit {
       if(res["errorCode"]!=0) {
         this.notificationsService.addError(res["errorMessage"]);
       } else {
-      this.accountOptionsForm.reset(formModel);
+        this.accountOptionsForm.reset(formModel);
       }
     },(err)=>{
 
