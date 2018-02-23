@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { loginIdentifierConflictChoices } from '../../model/login-identifier-conflict-choices.constant';
 import { NotificationsService } from 'angular4-notify';
 import { ActivatedRoute } from '@angular/router';
+import { RepoService } from '../../services/repo.service';
 
 
 
@@ -16,13 +17,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AccountOptionsFormComponent implements OnInit {
 
-  getAccountOptionsSubscription: Subscription;
-  accountOptions:AccountOptions;
   accountOptionsForm: FormGroup;
   loginIdentifierConflictChoices = loginIdentifierConflictChoices;
   readonly:boolean;
+  accountOptions: AccountOptions;
 
-  constructor(private restService: RestService,
+
+  constructor(private restService: RestService, private repoService: RepoService,
     private fb: FormBuilder,private notificationsService: NotificationsService,private route: ActivatedRoute
   ) { }
 
@@ -30,18 +31,21 @@ export class AccountOptionsFormComponent implements OnInit {
 
     this.readonly = this.route.snapshot.data['readonly'];
 
-    this.getAccountOptionsSubscription = this.restService.getAccountOptions().subscribe(accountOptions => {
+    this.repoService.accountOptionsUpdated.subscribe((accountOptions)=>{
       this.accountOptions = accountOptions;
       this.createForm();
-    });
-  }
+    })
 
-  ngOnDestroy(): void {
-    this.getAccountOptionsSubscription.unsubscribe();
-  }
+    this.repoService.getAccountOptions();
 
+  }
   createForm() {
+
     this.accountOptionsForm = this.fb.group(this.accountOptions);
+
+    this.accountOptionsForm.valueChanges.subscribe(value=>{
+      this.repoService.setRepoAccountOptions(value);
+    });
 
     if(this.readonly){
       this.accountOptionsForm.disable();
@@ -62,7 +66,5 @@ export class AccountOptionsFormComponent implements OnInit {
 
     });
   }
-
-
 
 }
