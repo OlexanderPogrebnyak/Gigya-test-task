@@ -172,3 +172,16 @@ body {
         width: 42rem;
     }
 }
+
+.close {
+    padding-bottom: 5px;
+    padding-left: 5px;
+    border-radius: .25rem;
+}
+
+i.material-icons {
+    color: black;
+    font-style: inherit;
+    font-weight: normal;
+    font-size: 18px;
+}
