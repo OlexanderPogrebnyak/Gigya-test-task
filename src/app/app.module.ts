@@ -6,10 +6,11 @@ import { AccountOptionsService } from './services/account-options.service';
 import { AccountOptionsFormComponent } from './components/account-options-form/account-options-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NotificationsModule, NotificationsService} from 'angular4-notify';
+import {NotificationsModule} from 'angular4-notify';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,9 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NotificationsModule,
-
+    ServicesModule
   ],
   providers: [
-    AccountOptionsService,
-    NotificationsService
   ],
   bootstrap: [AppComponent]
 })
